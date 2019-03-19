@@ -45,14 +45,15 @@ w_grad,b_grad = tf.gradients(loss,[w,b])
 print('w_grad: %.4f' % w_grad.eval(session=sess))
 print('b_grad: %.4f' % b_grad.eval(session=sess))
 
-lr = 1e-2
+# lr = 1e-2
+lr = 0.01
 w_update = w.assign_sub(lr*w_grad)
 b_update = b.assign_sub(lr*b_grad)
 sess.run([w_update,b_update])
 
 y_pred_numpy = y_pred.eval(session=sess)
 
-for e in range(1000):
+for e in range(10000):
     sess.run([w_update,b_update])
     y_pred_numpy = y_pred.eval(session=sess)
     loss_numpy = loss.eval(session=sess)
